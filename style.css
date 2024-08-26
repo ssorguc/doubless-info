@@ -1,0 +1,41 @@
+.green-text {
+    color: #b7c9b3;
+}
+
+.pink-text {
+    color: #e7c1bf;
+}
+
+.blue-text {
+    color: #353962;
+}
+
+
+.green-bg {
+    background-color: #b7c9b3;
+}
+
+.blue-bg {
+    background-color: #353962;
+}
+
+.light-bg {
+    background-color: #fbf6f5;
+}
+
+a.icon-link {
+    color: #b7c9b3 !important;
+    text-decoration: underline #b7c9b3 !important;
+}
+
+.rock-salt-regular {
+    font-family: "Rock Salt", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.coding-kids-bg {
+    background: url("assets/coding-kids-bg.png");
+    background-position: center;
+    background-size: cover;
+}
