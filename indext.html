@@ -1,545 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
-    <title>doubless - Kursevi Info</title>
-    <link rel="icon" type="image/x-icon" href="assets/doubless-logo.svg">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Movie Night</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="config.js"></script>
 </head>
 
-<body>
-    <!--NAVBAR-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary rounded sticky-top" aria-label="Main menu"
-        data-bs-theme="dark">
+<body data-bs-theme="dark">
+    <!-----------------NAVBAR-------------------->
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
-                aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">Movie Night Pro</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-                <ul class="navbar-nav col-lg-12 justify-content-lg-center">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#o-doubless">O nama</a>
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#kursevi">Kursevi</a>
+                        <a class="nav-link" href="movies.html">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#termini">Termini</a>
+                        <a class="nav-link" href="login.html">Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#cijene">Cijene</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#prijava">Prijavi se</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Snacks
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Popcorn</a></li>
+                            <li><a class="dropdown-item" href="#">Tacos</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#">Chips</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
-    </nav>
-    <!--END NAVBAR-->
-    <main data-bs-spy="scroll" data-bs-target="#main-nav">
-        <!--HEADER-->
-        <div class="position-relative overflow-hidden p-3 p-md-5 coding-kids-bg text-center">
-            <div class="col-md-6 p-lg-5 mx-auto my-5">
-                <h1 class="display-3 fw-bold blue-text">Programiranje za djecu</h1>
-                <h3 class="fw-normal text-muted mb-3">Želimo učiniti kodiranje i STEM zabavnim, pristupačnim i cool
-                    dijeci svih uzrasta.</h3>
-                <div class="d-flex gap-3 justify-content-center lead fw-normal">
-                    <a class="icon-link mx-5" href="#o-doubless">
-                        Saznaj više o nama
-                    </a>
-                    <a class="icon-link" href="#prijava">
-                        Prijavi se <i class="bi-arrow-right-circle"></i>
+    <!------------------HEADER-------------------->
+    <div class="containr text-center">
+        <div class="row align-items-center pt-5">
+            <div class="col-md"></div>
+            <div class="col-md d-flex">
+                <input id="searchInput" class="form-control me-2" type="search" placeholder="Search"
+                    aria-label="Search" />
+                <button class="btn btn-outline-danger" type="submit" onclick="searchMovies()">Search</button>
+            </div>
+            <div class="col-md"></div>
+            <div id="result"></div>
+        </div>
+    </div>
+    <div class="container text-center mt-5 mb-5">
+        <h1 class="display-2 mb-5">Top movies today</h1>
+        <div class="row align-items-center">
+            <div id="1" class="col-lg-3"></div>
+            <div id="2" class="col-lg-3"></div>
+            <div id="3" class="col-lg-3"></div>
+            <div id="4" class="col-lg-3"></div>
+        </div>
+    </div>
 
-                    </a>
-                </div>
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="assets/c1.jpg" class="d-block w-100" alt="Movie Theater" />
+            </div>
+            <div class="carousel-item">
+                <img src="assets/c2.jpg" class="d-block w-100" alt="Popcorn" />
+            </div>
+            <div class="carousel-item">
+                <img src="assets/c3.jpg" class="d-block w-100" alt="Friends" />
             </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
-        <!--KURSEVI-->
-        <div id="kursevi" class="container px-4 py-5">
-
-            <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
-                <div class="col d-flex flex-column align-items-start gap-2">
-                    <h2 class="fw-bold blue-text">Naši kursevi i programi</h2>
-                    <p class="lead">
-                        Od avantura kodiranja prilagođenih početnicima do naprednijeg programiranja, naši kursevi su
-                        dizajnirani sa sve. Bilo da vaše dijete sanja o pravljenju video igrica,
-                        dizajniranju
-                        aplikacija ili samo želi sa se upozna sa kodiranjem, mi imamo kurs za njih. U ponudi su
-                        <strong class="font-monospace green-text">4 vrste</strong>
-                        edukativnih programa. Časovi se održavaju online. Plačate tek kada započnu časovi.
-                    </p>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfyMTH7aptiJFYDIwvxErD6fFetUZGbNiWB-TC8jbRdV_e57Q/viewform?usp=sf_link"
-                        class="green-text">Prijavi se</a>
-                </div>
-
-                <div class="col">
-                    <div class="row row-cols-1 row-cols-sm-2 g-4">
-                        <div class="col d-flex flex-column gap-2">
-                            <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center green-bg fs-4 rounded-3">
-                                <i class="bi bi-controller  text-light"></i>
-                            </div>
-                            <h4 class="fw-semibold mb-0 blue-text">Razvoj igrica sa Python 👾 <span
-                                    class="pink-text">#gaming</span></h4>
-                            <p class="text-body-secondary">Pretvorite sve te sate igranja igrica u nešto produktivno!
-                                Predviđen za manje uzraste.
-                            </p>
+    <div class="toast-container position-fixed bottom-0 start-0 p-6">
+        <div class="toast" id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <div class="d-flex gap-4">
+                    <span><i class="fa-solid fa-circle-check fa-lg icon-success"></i></span>
+                    <div class="d-flex flex-column flex-grow-1 gap-2">
+                        <div class="d-flex align-items-center">
+                            <span class="fw-semibold">Error</span>
+                            <button type="button" class="btn-close btn-close-sm ms-auto" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
                         </div>
-
-                        <div class="col d-flex flex-column gap-2">
-                            <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center green-bg fs-4 rounded-3">
-                                <i class="bi bi-code-slash  text-light"></i>
-                            </div>
-                            <h4 class="fw-semibold mb-0 blue-text">Razvoj web aplikacija 👩‍💻 </h4>
-                            <p class="text-body-secondary">Perfektno za početnike svih uzrasta. Učimo programiranje kroz
-                                praktičan projekat.
-                            </p>
-                        </div>
-
-                        <div class="col d-flex flex-column gap-2">
-                            <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center green-bg fs-4 rounded-3">
-                                <i class="bi bi-code-slash  text-light"></i>
-                            </div>
-                            <h4 class="fw-semibold mb-0 blue-text">Napredni razvoj web app 💻</h4>
-                            <p class="text-body-secondary">Za učenike koji su završili prethodni kurs ili djecu sa
-                                predznanjem. Prikladniji za starije uzraste.
-                            </p>
-                        </div>
-
-                        <div class="col d-flex flex-column gap-2">
-                            <div
-                                class="feature-icon-small d-inline-flex align-items-center justify-content-center green-bg fs-4 rounded-3">
-                                <i class="bi bi-braces text-light"></i>
-                            </div>
-
-                            <h4 class="fw-semibold mb-0 blue-text">Klub malih programera 🧑‍🔬<span
-                                    class="pink-text">#stem</span></h4>
-                            <p class="text-body-secondary">Mix kodiranja, i nauke. Idealan za djecu koja
-                                žele da se bave programiranjem kao hobijem.
-                            </p>
-                        </div>
+                        <span id="error-message"></span>
                     </div>
                 </div>
             </div>
         </div>
-        <!--KURSEVI DETALJNO-->
-        <div clas="container mt-5 mb-5">
-            <h2 class="display-6 fw-bold blue-text mb-5 text-center">Detaljnije o svakom kursu</h2>
-            <div class="row text-center">
-                <div class="col-lg-6 light-bg">
-                    <div class="my-3 p-3">
-                        <i class="bi bi-braces green-text fs-3"></i>
-                        <h2 class="display-5">Razvoj igrica sa Python</h2>
-                        <p class="lead    ">Pravimo malu igricu koristeći programski jezik Python.</p>
-                    </div>
-                    <div class="bg-body shadow-sm mx-auto p-4"
-                        style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                        <p>Predviđen za djecu uzrasta od 9 do 13 godina koja se tek upoznaju sa programiranjem.</p>
-                        <p>Kurs traje 2 mjeseca, 2 puta sedmično gdje je čas u trajanju od 1h. Po završetku kursa
-                            dodjeljuje se certifikat sa QR kodom koji vodi do njihovog finalnog
-                            projekta tj. igrice koju su napravili.</p>
+    </div>
 
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="my-3 p-3">
-                        <i class="bi bi-file-code-fill green-text fs-2"></i>
-                        <h2 class="display-5">Web dev</h2>
-                        <p class="lead">Učimo programiranje praveči web aplikaciju.</p>
-                    </div>
-                    <div class="bg-body shadow-sm mx-auto p-4"
-                        style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                        <p>Predviđen za djecu uzrasta od 9 do 17 godina koja se tek upoznaju sa programiranjem.</p>
-                        <p>Kurs traje 2 i po mjeseca, 2 puta sedmično gdje je čas u trajanju od 1h 30 min. Ovo je naš
-                            najdetaljniji i cijelovitiji kurs. Po završetku kursa
-                            dodjeljuje se certifikat sa QR kodom koji vodi do njihovog finalnog
-                            projekta tj. aplikacije koju su napravili.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col-lg-6">
-                    <div class="my-3 p-3">
-                        <i class="bi bi-file-code-fill pink-text fs-2"></i>
-                        <h2 class="display-5">Napredni web dev</h2>
-                        <p class="lead    ">Učimo programiranje kao veliki programeri kroz projekat.</p>
-                    </div>
-                    <div class="bg-body shadow-sm mx-auto p-4"
-                        style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                        <p>Predviđen za djecu starijeg uzrasta koja se tek upoznaju sa programiranjem.</p>
-                        <p>Kurs traje 2 i po mjeseca, 2 puta sedmično gdje je čas u trajanju od 1h. Namjenjen je
-                            učenicima koji su završili Web development kurs ili djeci sa mnogo predznanja. Po završetku
-                            kursa
-                            dodjeljuje se certifikat sa QR kodom koji vodi do njihovog finalnog
-                            projekta tj. aplikacije koju su napravili.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 light-bg">
-                    <div class="my-3 p-3">
-                        <i class="bi bi-braces text-light green-bg fs-3"></i>
-                        <h2 class="display-5">Klub malih programera</h2>
-                        <p class="lead">Članovi kluba uče programiranje i teme iz nauke.</p>
-                    </div>
-                    <div class="bg-body shadow-sm mx-auto p-4"
-                        style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                        <p>Mnoga djeca su zaljubljenici u tehnologiju, računare i nauku, te se žele time baviti kao
-                            hobijem.</p>
-                        <p>Ovaj program je savršen za takve mališane koji će biti okruženi drugovima i drugaricama sa
-                            istim interesovanjima.</p>
-                        <p>Klub je na bazi mjesečne članarine, i stalno se uče nove teme bazirane na praktičnom radu.
-                            Imamo časove 2 puta sedmično po 1h.
-                        </p>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!--CERTIFIKAT-->
-        <div class="position-relative overflow-hidden p-3 p-md-5 text-center">
-            <div class="col-md-12 p-lg-5 mx-auto my-5">
-                <img class="img-fluid" src="assets/certifikat.png">
-            </div>
-        </div>
-        <!--PRIJAVA-->
-        <div id="prijava" class="p-5 m-5 light-bg rounded-3">
-            <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold blue-text">Prijava</h1>
-                <p class="col-md-8 fs-5">
-                    Spremni ste da nam se pridružite? Prijava je vrlo jednostavna. Klinite na “Prijavi se”
-                    dugme ispod i vaše dijete će biti spremno da postane mali programer. Naše
-                    <strong> prijave su felksibilne</strong> što znači da možete da se prijavite i započnete na bilo
-                    kojem od
-                    dolazećih ciklusa. <strong>Plačanje vršite tek kada krenete na kurs</strong>. Prijave na Klub malih
-                    programera su otvorene svaki mjesec.
-                </p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfyMTH7aptiJFYDIwvxErD6fFetUZGbNiWB-TC8jbRdV_e57Q/viewform?usp=sf_link"
-                    class="btn btn-dark btn-lg" type="button">Prijavi se</a>
-            </div>
-        </div>
-
-        <!--O NAMA-->
-        <div id="o-doubless" class="px-4 pt-5 text-center border-bottom">
-            <h1 class="display-4 fw-bold blue-text">o doubless</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">Doubless je edukativna platforma kreirana od strane stručnjaka IT industrije u
-                    želji da približi ovu nauku djeci i tinejdžerima. U Doublessu ne učimo djecu samo da kodiraju;
-                    njegujemo sljedeće
-                    generacija kreativnih mislilaca, onih koji rješavaju probleme i tehnoloških entuzijasta. Naša
-                    misija? Napraviti
-                    kodiranje
-                    zabavno, pristupačno i potpuno cool za djecu svih uzrasta. Želimo da <spam class="green-bg">djeca
-                        budu više od potrošaća
-                        kompjuterskih nauka i tehnologije</spam>.
-                </p>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                    <a href="#kursevi" type="button" class="btn btn-dark btn-lg px-4 me-sm-3">Naši kursevi</a>
-                </div>
-            </div>
-            <div class="overflow-hidden" style="max-height: 30vh;">
-                <div class="container px-5">
-                    <img src="https://scontent.fsjj1-1.fna.fbcdn.net/v/t39.30808-6/355636061_574315298188347_8721542532376691542_n.png?_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=D7DRjhoy9J8Q7kNvgGRf_wW&_nc_ht=scontent.fsjj1-1.fna&oh=00_AYCmL9m9R1mGpqq2GhCBnh_UpuxuMKOahS43EcLEIBGIGQ&oe=66D1874F"
-                        class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500"
-                        loading="lazy">
-                </div>
-            </div>
-        </div>
-        <!--TESTIMONIALS-->
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-8 col-md-8 mx-auto">
-                    <h1 class="fw-light">Šta kažu roditelji</h1>
-                    <p class="lead text-body-secondary">Testimonials</p>
-                </div>
-            </div>
-            <div class="row py-lg-5">
-                <div class="col-lg-3 col-md-4 mx-auto">
-                    <img class="img-fluid" src="assets/testimonials1.png">
-                </div>
-                <div class="col-lg-3 col-md-4 mx-auto">
-                    <img class="img-fluid" src="assets/testimonials2.png">
-                </div>
-                <div class="col-lg-3 col-md-4 mx-auto">
-                    <img class="img-fluid" src="assets/testimonials3.png">
-                </div>
-                <div class="col-lg-3 col-md-4 mx-auto">
-                    <img class="img-fluid" src="assets/testimonials4.png">
-                </div>
-            </div>
-        </section>
-        <!--INSTRUKTOR-->
-        <div class="container marketing mt-5">
-            <div class="row featurette">
-                <div class="col-lg-7">
-                    <h2 class="display-5 fw-bold blue-text">Instruktor
-                    </h2>
-                    <p class="lead green-text">Inspiring young minds to code</p>
-
-                    <p class="lead">Moje ime je Selma, softverski sam inženjer i edukator. Završila sam Elektrotehnički
-                        fakultet u Sarajevu i trenutno radim u uglednoj IT kompaniji kao full stack developer (o mojoj
-                        karijeri možete saznati na LinkedIn profilu).
-                        Pored rada u IT sektoru, imam i iskustvo u podučavanju. Radila sam u internacionalnim školama i
-                        organizacijama kao
-                        CoderDojo, dijeleći svoje znanje i stručnost sa učenicima i pomažući im da shvate složene
-                        koncepte na jednostavan i lahko razumljiv način. Podučavanje me je inspirisalo da krenem sa
-                        kreiranjem sopstvenih edukativnih resursa i kurseva, tako je nastao <spam
-                            class="strong pink-text">doubless</spam>, moja obrazovna platforma.
-                    </p>
-                    <h3 class="rock-salt-regular blue-text mt-3 mb-2">Selma S.</h3>
-                    <a href="https://www.instagram.com/doubless.primary/?hl=hr
-                    " class="pink-text fs-3"><i class="bi bi-instagram"></i></a>
-                    <a href="https://www.facebook.com/doubless.primary" class="pink-text fs-3"><i
-                            class="bi bi-facebook"></i></a>
-                    <a href="https://www.linkedin.com/in/selma-sorguc/
-                    " class="pink-text fs-3"><i class="bi bi-linkedin"></i></a>
-                    <a href="https://www.linkedin.com/in/selma-sorguc/
-                    " class="pink-text fs-3"><i class="bi bi-pinterest"></i></a>
-                </div>
-                <div class="col-lg-5">
-                    <img class="img-fluid float-end" src="assets/Professional Photos/7.png">
-                </div>
-            </div>
-
-            <hr class="featurette-divider">
-
-        </div>
-
-        <!--TERMINI-->
-        <div class="container">
-            <div id="termini" class="container mt-5 mb-5">
-                <h2 class="mt-5 mb-5 blue-text"><em>Sami postavljate termin</em></h2>
-                <div class="row align-items-md-stretch">
-                    <div class="col-md-6">
-                        <div class="h-100 p-5 blue-bg text-light rounded-3">
-                            <h2>Termini</h2>
-                            <p>Nakon prijave dobivate email prije početka kursa. Email sadrži upitnik, gdje
-                                izaberete
-                                sve
-                                termine koji vam odgovaraju. Na osnovu toga se formiraju grupe.</p>
-                            <h4>Prilagođevamo se vašem
-                                rasporedu i obavezama.</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="h-100 p-5 light-bg border rounded-3">
-                            <h2 class="blue-text">Ternutni raspored</h2>
-                            <ul class="list-group list-group-horizontal">
-                                <li class="list-group-item">Klub malih programera</li>
-                                <li class="list-group-item">Pon 13h</li>
-                                <li class="list-group-item">Uto 20h</li>
-                                <li class="list-group-item">Sri 13h</li>
-                                <li class="list-group-item">Ned 19h</li>
-                            </ul>
-                            <ul class="list-group list-group-horizontal">
-                                <li class="list-group-item">Web dev</li>
-                                <li class="list-group-item">Uto 17:15h</li>
-                                <li class="list-group-item">Čet 19h</li>
-                            </ul>
-                            <ul class="list-group list-group-horizontal">
-                                <li class="list-group-item">Napredni Web dev</li>
-                                <li class="list-group-item">Uto 19h</li>
-                                <li class="list-group-item">Čet 20:30h</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr class="featurette-divider">
-        <!--CIJENE-->
-        <div id="cijene" class="container mt-5 mb-5">
-            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                <h1 class="display-5 fw-bold blue-text">Cijene</h1>
-                <p class="fs-5 text-body-secondary">Vjerujemo da svako dijete treba da ima priliku da uči programiranje.
-                    Cijene kurseva kodiranja za djecu su visoke na našem tržištu, te mnogi roditelji ih ne mogu
-                    priuštiti. Naši programi se kreću od samo 60 KM do 125 mjesečno, sa časovima dva puta sedmično. To
-                    je mala cijena za skup vještina i količinu sati. Također, kursevi se mogu platiti u 2 rate. Popust
-                    imaju roditelji koji upisuje više od jednog djeteta. Svi roditelji teškog finansijskog statusa nam
-                    se mogu javiti direktno za dodatne olakšice.
-                </p>
-            </div>
-            <div class="row row-cols-1 row-cols-md-4 mb-3 text-center">
-                <div class="col-md-3">
-                    <div class="card mb-4 rounded-3 shadow-sm border-info">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal text-info">Razvoj igrica u Python</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">220 KM</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>2 put sedmično</li>
-                                <li>18 sesija (2 mjeseca)</li>
-                                <li>Čas 1h</li>
-                                <li>Certifikat sa QR kodom</li>
-                                <li>Za manje uzraste</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card mb-4 rounded-3 shadow-sm border-warning">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal text-warning">Web dev</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">250 KM</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>2 put sedmično</li>
-                                <li>20 sesija (2.5 mjeseca)</li>
-                                <li>Čas 1h 30min</li>
-                                <li>Certifikat sa QR kodom</li>
-                                <li>Svi uzrasti</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card mb-4 rounded-3 shadow-sm border-success">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal text-success">Napredni web dev</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">250 KM</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>Za učenike koji su završili web dev</li>
-                                <li>2 put sedmično</li>
-                                <li>20 sesija (2.5 mjeseca)</li>
-                                <li>Čas 1h</li>
-                                <li>Certifikat sa QR kodom</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                        <div class="card-header py-3 text-bg-primary border-primary">
-                            <h4 class="my-0 fw-normal">Klub malih programera</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">60 KM<small
-                                    class="text-body-secondary fw-light">/mj</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>Na bazi mjesečne članarine</li>
-                                <li>Za manje uzraste</li>
-                                <li>Programiranje i STEM teme</li>
-                                <li>2 put sedmično</li>
-                                <li>Čas 1h</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="display-5 fw-bold blue-text mb-4">Uporedba</h2>
-
-            <div class="table-responsive">
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <th style="width: 20%;"></th>
-                            <th style="width: 20%;">Razvoj igrica u Python</th>
-                            <th style="width: 20%;">Web dev</th>
-                            <th style="width: 20%;">Napredni web dev</th>
-                            <th style="width: 20%;">Klub malih programera</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="text-start">Dužina časa</th>
-                            <td>1h</td>
-                            <td>1h 30min</td>
-                            <td>1h</td>
-                            <td>1h</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Uzrast</th>
-                            <td>9-13</td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg>9-17</td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg>13-17 sa predznanjem</td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg>9-13</td>
-                        </tr>
-                    </tbody>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="text-start">Trajanje kursa</th>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg>2 mjeseca (18 sesija)</td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg>2.5 mjeseca (20 sesija)</td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg>2.5 mjeseca (20 sesija)</td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg>Mjesečna članarina</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">FREE Dodatna podrška</th>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i></td>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i></td>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Certifikat</th>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i></td>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i>
-                            <td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Plačanje na rate</th>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i></td>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i>
-                            <td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Popust za više djece 20%</th>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i></td>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i>
-                            <td><i class="bi bi-check-circle-fill pink-text"></i>
-                            <td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
-
-        <footer class="container mt-5">
-            <p class="float-end"><a class="green-text" href="#">Nazad na vrh</a></p>
-            <p>© doubless</p>
-        </footer>
-    </main>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!--Bootstrap JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
